@@ -1,6 +1,7 @@
 # AwsSnsKit
 
-TODO: Write a gem description
+THIS PROJECT IS NOW WORK IN PROGRESS AND SHOULD NOT BE USED IN PRODUCTION.
+
 
 ## Installation
 
