@@ -11,6 +11,7 @@ module AwsSnsKit
     end
     
     def message
+      { APNS: { aps: { alert: alert, sound: sound, badge: badge } } }
     end
   end
 end

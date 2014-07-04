@@ -1,11 +1,12 @@
-require "aws_sns_kit/version"
-require "aws_sns_kit/notification"
-require "aws_sns_kit/apns"
-require "ostruct"
-
+require 'aws_sns_kit/version'
+require 'aws_sns_kit/notification'
+require 'aws_sns_kit/apns'
+require 'ostruct'
+require 'aws_sns_kit/notifier'
+require 'active_record'
 
 begin
-  require "pry"
+  require 'pry'
 rescue LoadError
 end
 

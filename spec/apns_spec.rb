@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module AwsSnsKit
-  describe Apns, focus: true do
+  describe Apns do
     let(:apns_options) {
       OpenStruct.new({
         alert: 'Message received via aws_sns_kit',
