@@ -19,7 +19,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### How to use?
+
+You can use `push_notify` instance method with your model instance to send push notification via aws SNS.
+Before using this method, make sure that your model includes module from aws_sns_kit.
+
+```ruby
+class User < ActiveRecord::Base
+  include AwsSnsKit::Notifier
+end
+```
+
+In default, this gem assumes that your model has the `device_token` attribute.
+You can change default by using configuration.
+
+TODO:
+
+Here is exapmle.
+
+#### APNS(Apple Push Notification Service)
+
+```ruby
+user = User.first
+
+notification_info = {
+        alert: 'Message received via aws_sns_kit',
+        sound: 'bingbong.aiff',
+        badge: 2,
+        content_available: 1,
+        custom_data: { awesome: 'something' }
+      }
+
+user.push_notify(notification_info, :apns)
+```
+
+`push_notify` method takes first argument as notification hash. Specify your custom information here.
+
+Second argument is optional. In default, this gem expect your model instance to respond `platform` instance method or attribute.
+
+If you want to change default value, please use configuration.
+
 
 ## Contributing
 
