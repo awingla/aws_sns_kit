@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module AwsSnsKit
-  describe Notification, focus: true do
+  describe Notification do
     let(:notification) { AwsSnsKit::Notification.new(OpenStruct.new, :apns) }
     let(:platform) { notification.platform }
 

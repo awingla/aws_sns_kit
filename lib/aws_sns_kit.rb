@@ -4,6 +4,7 @@ require 'aws_sns_kit/apns'
 require 'ostruct'
 require 'aws_sns_kit/notifier'
 require 'active_record'
+require 'aws_sns_kit/aws_client.rb'
 
 begin
   require 'pry'
