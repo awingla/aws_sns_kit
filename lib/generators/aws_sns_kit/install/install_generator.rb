@@ -1,16 +1,19 @@
+require 'rails/generators/active_record'
+
 module AwsSnsKit
   module Generators
-    class InstallGenerator < Rails::Generators::Base
-      argument :model_name, type: :string, required: true
+    class InstallGenerator < ActiveRecord::Generators::Base
+      source_root File.expand_path("../../templates", __FILE__)
 
-      def create_migration
-        generate "migration", "add_aws_sns_kit_columns_to_#{table_name} device_token:string platform_endpoint:string" 
+      def create_migration_file
+        migration_template "migration.rb", "db/migrate/add_device_to_#{table_name}.rb"
       end
 
       private
       def table_name
-        model_name.constantize.table_name
+        name.constantize.table_name
       end
     end
   end
 end
+
