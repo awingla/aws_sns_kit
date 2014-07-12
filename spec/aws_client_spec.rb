@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module AwsSnsKit
-  describe AwsClient, focus: true do
+  describe AwsClient do
     let(:client) { AwsSnsKit::AwsClient.new }
     it 'is aws_client'
 
