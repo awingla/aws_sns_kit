@@ -1,7 +1,10 @@
 # AwsSnsKit
 
-THIS PROJECT IS NOW WORK IN PROGRESS AND SHOULD NOT BE USED IN PRODUCTION.
+#### THIS PROJECT IS NOW WORK IN PROGRESS AND SHOULD NOT BE USED IN PRODUCTION.
 
+## What is this?
+
+AwsSnsKit is a solution for integrating Amazon Web Service(AWS) Simple Notification Service(SNS) into Rails application.
 
 ## Installation
 
@@ -17,30 +20,63 @@ Or install it yourself as:
 
     $ gem install aws_sns_kit
 
-## Usage
-
-### How to use?
-
-# Install
+## Configuration
 
 Before using aws_sns_kit, you need to generate a file using generator.
 Specify your model as first Argument.
 
 ```ruby
-rails generate aws_sns_kit:install User
+rails generate aws_sns_kit:install MODEL_NAME
 ```
 
-This command create a migration file:
-
+ex.
 ```ruby
 rails generate aws_sns_kit:install User
 ```
+
+
+This generator command create following files.
+
+
+`
+config/initializers/aws_sns_kit.rb
+db/migrate/20140715070941_add_aws_sns_kit_to_users.rb
+`
 
 Then, migrate.
 
 ```ruby
 rake db:migrate
 ```
+
+Also, you need to configure initializer file.
+
+Following configuration is for using aws-sdk.
+More information here. https://github.com/aws/aws-sdk-ruby
+
+```ruby
+#config/initializers/aws_sns_kit.rb
+
+AwsSnsKit.configure do |config|
+  config.access_key_id = 'your access_key_id here'
+  config.secret_access_key = 'your secret_access_key here'
+  config.region = 'your region here'
+
+  #specify PlatformApplicationArn respectively.
+
+  config.end_point = { 
+    apns: '',
+    apns_sandbox: '', 
+    gcm: ''
+  }
+end
+
+```
+
+
+## How to use?
+
+#### APNS(Apple Push Notification Service)
 
 You can use `push_notify` instance method with your model instance to send push notification via aws SNS.
 Before using this method, make sure that your model includes module from aws_sns_kit.
@@ -52,7 +88,6 @@ end
 ```
 
 
-#### APNS(Apple Push Notification Service)
 
 ```ruby
 user = User.first
@@ -69,6 +104,7 @@ user.push_notify(notification_info)
 ```
 
 `push_notify` method takes first argument as notification hash. Specify your custom information here.
+
 
 ## Contributing
 
