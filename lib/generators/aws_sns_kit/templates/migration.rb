@@ -3,7 +3,7 @@ class AddAwsSnsKitTo<%= table_name.camelize %> < ActiveRecord::Migration
     change_table(:<%= table_name %>) do |t|
       t.string :device_token, unique: true
       t.string :platform_endpoint, unique: true
-      t.stirng :sns_custom_data
+      t.string :sns_custom_data
       t.string :sns_platform
     end
   end

@@ -6,7 +6,7 @@ module AwsSnsKit
       source_root File.expand_path("../../templates", __FILE__)
 
       def create_migration_file
-        migration_template "migration.rb", "db/migrate/add_device_to_#{table_name}.rb"
+        migration_template "migration.rb", "db/migrate/add_aws_sns_kit_to_#{table_name}.rb"
       end
 
       def create_initialize_file
