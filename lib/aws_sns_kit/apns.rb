@@ -11,7 +11,10 @@ module AwsSnsKit
     end
     
     def message
-      { APNS: { aps: { alert: alert, sound: sound, badge: badge } } }
+      payload = { aps: { alert: alert, sound: sound, badge: badge } }.to_json
+      { APNS: payload,
+        APNS_SANDBOX: payload
+      }.to_json
     end
   end
 end

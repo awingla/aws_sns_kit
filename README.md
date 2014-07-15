@@ -65,30 +65,10 @@ notification_info = {
         custom_data: { awesome: 'something' }
       }
 
-user.push_notify(notification_info, :apns)
+user.push_notify(notification_info)
 ```
 
 `push_notify` method takes first argument as notification hash. Specify your custom information here.
-
-Second argument is optional. In default, this gem expect your model instance to respond `platform` instance method or attribute.
-
-For instance,
-
-```ruby
-class User < ActiveRecord::Base
-  #if you are using iOS only,
-  def push_platform
-    :apns 
-  end
-
-  #Or using Android only,
-  def push_platform
-    :gcm
-  end
-end
-```
-
-If nothing is specified, aws_sns_kit will use `:apns` as default value.
 
 ## Contributing
 

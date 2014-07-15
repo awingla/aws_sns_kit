@@ -1,5 +1,7 @@
 module AwsSnsKit
   class AwsClient
+    attr_reader :client_wrapper, :instance, :notification
+
     def initialize(instance, notification)
       @client_wrapper = AWS::SNS.new.client
       @instance = instance
@@ -7,7 +9,7 @@ module AwsSnsKit
     end
 
     def publish
-      client_wrapper.publish(target_arn: platform_endpoint, message: notification.message, message_structure: :json)
+      client_wrapper.publish(target_arn: platform_endpoint, message: notification.message, message_structure: "json")
     rescue AWS::SNS::Errors::EndpointDisabled
       retry if enable
     end
@@ -16,16 +18,16 @@ module AwsSnsKit
 
     def enable
       client_wrapper.set_endpoint_attributes({
-        attributes: { Enabled: "true", CustomUserData: instance.custom_data}, 
+        attributes: { "Enabled" =>  "true", "CustomUserData" => instance.custom_data}, 
         endpoint_arn: platform_endpoint
       })
     end
 
     def create_endpoint
-      arn = AwsSnsKit.configuration.endpoint(instance.sns_platform)
-      response = client.create_platform_endpoint(
+      arn = AwsSnsKit.configuration.end_point(instance.sns_platform)
+      response = client_wrapper.create_platform_endpoint(
         platform_application_arn: arn, 
-        token: instance.token
+        token: instance.device_token
       )
       instance.platform_endpoint = response[:endpoint_arn]
       instance.save!
@@ -33,7 +35,7 @@ module AwsSnsKit
 
     def platform_endpoint
       if publishable?
-        instance.platform_endpoint?
+        instance.platform_endpoint
       else 
         if create_endpoint
           instance.platform_endpoint
