@@ -1,5 +1,3 @@
-require 'aws'
-
 module AwsSnsKit
   class AwsClient
     def initialize(instance, notification)

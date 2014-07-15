@@ -1,9 +1,10 @@
 require 'spec_helper'
+require 'aws-sdk'
 
 describe AwsSnsKit do
   describe '#configure' do
     let (:access_key_id) { 'AOIJOJOFIEJOWJILJFQW' }
-    let (:access_key_secret) { 'LSKGmpBV/CqRUTLUFCDcQBRRFRFKHO3DRbfpQB8h' }
+    let (:secret_access_key) { 'LSKGmpBV/CqRUTLUFCDcQBRRFRFKHO3DRbfpQB8h' }
     let (:region) { 'ap-northeast-1' }
     let (:endpoint) { 
       {
@@ -13,21 +14,20 @@ describe AwsSnsKit do
       }
     }
     let(:notification) { AwsSnsKit::Notification.new({}, :apns) }
+    let(:configuration) { AwsSnsKit.configuration }
 
     before do
       AwsSnsKit.configure do |config|
         config.access_key_id = access_key_id
-        config.secret_access_key = access_key_secret
+        config.secret_access_key = secret_access_key 
         config.region = region
         config.end_point = endpoint
       end
     end
       
-    it 'set AWS.config with id and secret' do
-      expect(AWS.config.access_key_id).to eq(access_key_id)
-      expect(AWS.config.access_key_secret).to eq(acess_key_secret)
+    it 'set configuration with id and secret' do
+      expect(configuration.access_key_id).to eq(access_key_id)
+      expect(configuration.secret_access_key).to eq(secret_access_key)
     end
-
   end
 end
-

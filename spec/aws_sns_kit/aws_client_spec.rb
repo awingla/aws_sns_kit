@@ -9,3 +9,4 @@ module AwsSnsKit
     end
   end
 end
+
