@@ -1,3 +1,5 @@
+require 'json'
+
 module AwsSnsKit
   class Apns
     attr_accessor :alert, :sound, :badge, :content_available, :custom_data
