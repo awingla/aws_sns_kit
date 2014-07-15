@@ -9,7 +9,12 @@ module AwsSnsKit
         migration_template "migration.rb", "db/migrate/add_device_to_#{table_name}.rb"
       end
 
+      def create_initialize_file
+        template "initializer.rb", "config/initializers/aws_sns_kit.rb"
+      end
+
       private
+
       def table_name
         name.constantize.table_name
       end
