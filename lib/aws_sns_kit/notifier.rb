@@ -2,7 +2,7 @@ module AwsSnsKit
   module Notifier
     def push_notify(options = {}, platform = nil) 
       notification = ::Notification.new(options, platform)
-      AwsClient.publish(self, notification)
+      AwsClient.new(self, notification).publish
     end
   end
 end

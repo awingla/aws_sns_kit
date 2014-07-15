@@ -34,5 +34,9 @@ module AwsSnsKit
     def region
       AWS.config.region
     end
+
+    def end_point(platform)
+      @end_point[platform.to_sym]
+    end
   end
 end
