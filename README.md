@@ -22,8 +22,8 @@ Or install it yourself as:
 
 ## Configuration
 
-Before using aws_sns_kit, you need to generate a file using generator.
-Specify your model as first Argument.
+Before using aws_sns_kit, you need to generate files using generator.
+Specify your model as first argument.
 
 ```ruby
 rails generate aws_sns_kit:install MODEL_NAME
@@ -40,6 +40,7 @@ This generator command create following files.
 
 `
 config/initializers/aws_sns_kit.rb
+
 db/migrate/20140715070941_add_aws_sns_kit_to_users.rb
 `
 
@@ -73,20 +74,18 @@ end
 
 ```
 
-
 ## How to use?
 
 #### APNS(Apple Push Notification Service)
 
-You can use `push_notify` instance method with your model instance to send push notification via aws SNS.
-Before using this method, make sure that your model includes module from aws_sns_kit.
+You can use `push_notify` instance method with your model instance to send push notification via AWS SNS.
+Before using this method, make sure that your model includes Notifier module from aws_sns_kit.
 
 ```ruby
 class User < ActiveRecord::Base
   include AwsSnsKit::Notifier
 end
 ```
-
 
 
 ```ruby
@@ -105,6 +104,23 @@ user.push_notify(notification_info)
 
 `push_notify` method takes first argument as notification hash. Specify your custom information here.
 
+#### Topic & Subscription
+
+Creating topics and subscribing it is one of the useful functions in AWS SNS.
+This gem has limited apis for operating topics and subscriptions.
+
+```ruby
+AwsSnsKit::Topic.create("topic name")
+
+AwsSnsKit::Topic.new("topic name").delete
+
+AwsSnsKit::Topic.list
+
+user = User.first
+user.subscribe_topic("topic name")
+
+AwsSnsKit::Topic.new("topic name").push_notify("message")
+```
 
 ## Contributing
 
