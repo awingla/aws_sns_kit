@@ -8,7 +8,11 @@ module AwsSnsKit
       @access_key_id = nil
       @secret_access_key = nil
       @region = 'us-east-1'
-      @end_point = {}
+      @end_point = { 
+        apns: '',
+        apns_sandbox: '', 
+        gcm: ''
+      }
     end
 
     def access_key_id=(value)

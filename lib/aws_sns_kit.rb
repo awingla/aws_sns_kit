@@ -6,7 +6,7 @@ require 'aws_sns_kit/notifier'
 require 'active_record'
 require 'aws_sns_kit/aws_client'
 require 'aws_sns_kit/configuration'
-
+j
 begin
   require 'pry'
 rescue LoadError

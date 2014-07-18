@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 module AwsSnsKit
   describe Configuration do
     let (:access_key_id) { 'AOIJOJOFIEJOWJILJFQW' }

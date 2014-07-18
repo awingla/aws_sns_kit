@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'aws-sdk'
 
 describe AwsSnsKit do
   describe '#configure' do
