@@ -4,7 +4,7 @@
 
 ## What is this?
 
-AwsSnsKit is a solution for integrating Amazon Web Service(AWS) Simple Notification Service(SNS) into Rails application.
+AwsSnsKit is a solution for integrating Amazon Web Service(AWS) Simple Notification Service(SNS) into a Rails application.
 
 ## Installation
 
@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Configuration
 
-Before using aws_sns_kit, you need to generate files using generator.
+Before using aws_sns_kit, you need to generate files using a generator.
 Specify your model as first argument.
 
 ```ruby
@@ -50,7 +50,7 @@ Then, migrate.
 rake db:migrate
 ```
 
-Also, you need to configure initializer file.
+Also, you need to configure your initializer file.
 
 Following configuration is for using aws-sdk.
 More information here. https://github.com/aws/aws-sdk-ruby
@@ -88,10 +88,12 @@ end
 ```
 
 
+Create notification payload hash.
+
 ```ruby
 user = User.first
 
-notification_info = {
+notification = {
         alert: 'Message received via aws_sns_kit',
         sound: 'bingbong.aiff',
         badge: 2,
@@ -99,28 +101,22 @@ notification_info = {
         custom_data: { awesome: 'something' }
       }
 
-user.push_notify(notification_info)
+user.push_notify(notification)
 ```
 
-`push_notify` method takes first argument as notification hash. Specify your custom information here.
+##### NOTE:
+Since AWS SNS can send notification to multiple platform, aws_sns_kit expect your MODEL to return the name of the platform when `sns_platform` method is called.
+Specify your platform name from one of the following.
 
-#### Topic & Subscription
+`[:apns, :apns_sandbox, :gcm]`
 
-Creating topics and subscribing it is one of the useful functions in AWS SNS.
-This gem has limited apis for operating topics and subscriptions.
+#### GCM(Google Cloud Messaging)
 
-```ruby
-AwsSnsKit::Topic.create("topic name")
+Work in progress now.
 
-AwsSnsKit::Topic.new("topic name").delete
+#### Topics & Subscription
 
-AwsSnsKit::Topic.list
-
-user = User.first
-user.subscribe_topic("topic name")
-
-AwsSnsKit::Topic.new("topic name").push_notify("message")
-```
+Work in progress now.
 
 ## Contributing
 

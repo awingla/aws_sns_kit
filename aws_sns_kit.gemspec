@@ -6,11 +6,11 @@ require 'aws_sns_kit/version'
 Gem::Specification.new do |spec|
   spec.name          = "aws_sns_kit"
   spec.version       = AwsSnsKit::VERSION
-  spec.authors       = ["awingla"]
+  spec.authors       = ["Tsubasa Ito"]
   spec.email         = ["stpanisush@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Easy integration for AWS SNS.}
+  spec.description   = %q{Easy integration for AWS SNS.}
+  spec.homepage      = "https://github.com/awingla/aws_sns_kit"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
