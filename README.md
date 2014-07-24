@@ -1,7 +1,5 @@
 # AwsSnsKit
 
-#### THIS PROJECT IS NOW WORK IN PROGRESS AND SHOULD NOT BE USED IN PRODUCTION.
-
 ## What is this?
 
 AwsSnsKit is a solution for integrating Amazon Web Service(AWS) Simple Notification Service(SNS) into a Rails application.
@@ -38,11 +36,11 @@ rails generate aws_sns_kit:install User
 This generator command create following files.
 
 
-`
+```ruby
 config/initializers/aws_sns_kit.rb
 
 db/migrate/20140715070941_add_aws_sns_kit_to_users.rb
-`
+```
 
 Then, migrate.
 
@@ -88,7 +86,7 @@ end
 ```
 
 
-Create notification payload hash.
+Create a notification payload hash and send it by applying argument to `push_notify` method.
 
 ```ruby
 user = User.first
@@ -105,10 +103,26 @@ user.push_notify(notification)
 ```
 
 ##### NOTE:
-Since AWS SNS can send notification to multiple platform, aws_sns_kit expect your MODEL to return the name of the platform when `sns_platform` method is called.
-Specify your platform name from one of the following.
+Since AWS SNS can send a notification to multiple platform, aws_sns_kit expect your MODEL to return the name of the platform when `sns_platform` method is called.
+Specify your platform name from one of the following to your MODEL's attributes or instance method.
 
 `[:apns, :apns_sandbox, :gcm]`
+
+
+```ruby
+# Set platform using model attribute
+
+pry(main)> User.first.sns_platform
+=> :apns
+
+# Or specify it using instance method
+
+class User < ActiveRecord::Base
+  def sns_platform
+    :apns
+  end
+end
+```
 
 #### GCM(Google Cloud Messaging)
 
@@ -120,7 +134,7 @@ Work in progress now.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/aws_sns_kit/fork )
+1. Fork it ( https://github.com/awingla/aws_sns_kit/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
