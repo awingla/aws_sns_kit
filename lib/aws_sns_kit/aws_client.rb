@@ -18,7 +18,7 @@ module AwsSnsKit
 
     def enable
       client_wrapper.set_endpoint_attributes({
-        attributes: { "Enabled" =>  "true", "CustomUserData" => instance.custom_data}, 
+        attributes: { "Enabled" =>  "true", "CustomUserData" => instance.sns_custom_data}, 
         endpoint_arn: platform_endpoint
       })
     end
